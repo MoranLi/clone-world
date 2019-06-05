@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Clone World</title>
+</head>
+<body>
+  <h1><b><strong>Clone World</strong></b></h1>
+  <div>
+    <p>Description</p>
+    Clone-World is a system that allow you to interactively browse code clones in a software system. 
+  </div>
+  <div>
+    <p>Documentation</p>
+    <div>
+      <p>JSON Files format</p>
+      <ol>
+        <li>
+          <a href="show/data_files/classes.json">classes.json</a>
+          <br>
+          it contains a single list about information about classes
+          <ol>
+            <li>
+              for each object of list
+              <ul>
+                  <li>type: the class type (1, 2, 3)</li>
+                  <li> id: the class id</li>
+                  <li>cloneCount: how many clones fragments in this class</li> 
+              </ul>
+            </li>
+          </ol>
+        </li>
+        <li>
+          <a href="show/data_files/files.json">files.json</a>
+          <br>
+          it contains a single list about information about files
+          <ol>
+            <li>
+              for each object of list
+              <ul>
+                  <li>path: the file path</li>
+                  <li>cloneCount: how many clones fragments in this file</li>
+              </ul>
+            </li>
+          </ol>
+        </li>
+        <li>
+          <a href="show/data_files/clones.json">clones.json</a>
+          <br>
+          it contains a single list about information about clones
+          <ol>
+            <li>
+              for each object of list
+              <ul>
+                  <li>id: the clone id</li>
+                  <li>chainId: the chain id of this clone fragment</li>
+                  <li>classType: the type of this clone (1, 2, 3)</li>
+                  <li>classId: the class id of this clone</li>
+                  <li>filePath: the file path of this clone</li>
+                  <li>startLine: the start line of this clone in the source code</li>
+                  <li>endLine: the end line of this clone in the source code</li>
+                  <li>sumChangeCount: the sum of change counts in all revisions</li>
+                  <li>finalRevision: the last revision that this clone exsits</li>
+                  <li>x: the x coordinate of the scatter plot</li>
+                  <li>y: the y coordinate of the scatter plot</li>
+                  <li>DC: the distinct color of the directory of this clone</li>
+                  <li>CC: the distinct color of the class of this clone</li>
+              </ul>
+            </li>
+          </ol> 
+        </li>
+        <li>
+          <a href="show/data_files/system.json">system.json</a>
+          <br>
+          it contains information of system: 
+          <ul>
+              <li>name: the name of the system (carol)</li>
+              <li>finalRevison: the last revision in the dataset</li>
+          </ul>
+        </li>
+        <li>
+          <a href="show/data_files/carol.json">carol.json</a>
+          <br>
+          it contains information of all clone chains in system: 
+          <ul>
+            <li>max_revision: end revision of system</li>
+            <li>min_revision: start revision of system</li>
+            <li>max_changecount: highest sum of changecount for all chains</li>
+            <li>max_instance_changecount: highest changecount for clone instance for all clone instance in all revision</li>
+            <li>system_name: name of system</li>
+            <li>
+                t1_clone_evolution: array of all clone chains in type 1
+                <ol>
+                  <li>
+                    for each object in array:
+                    <ul>
+                      <li>startRevision: start revision of chain</li>
+                      <li>endRevision: end revision of chain</li>
+                      <li>sumChangeCount: sum of changecount of this chain</li>
+                      <li>name: chain id</li>
+                      <li>type: type of chain</li>
+                      <li>
+                        supportCountMap
+                        <br>
+                        this object contains support count of current chain compare to another chain
+                        <ul>
+                          <li>another chain id : support count between current chain & another chain</li>
+                        </ul>
+                      </li>
+                      <li>
+                        crossBpundaryCountMap
+                        <br>
+                        this object contains cross boundary count of current chain compare to another chain
+                        <ul>
+                          <li>another chain id : cross boundary count between current chain & another chain</li>
+                        </ul>
+                      </li>
+                      <li>
+                        baseCase
+                        <br>
+                        this object contains information about current clone chain in startRevision
+                        <ul>
+                          <li>filePath: the file path of this clone</li>
+                          <li>startLine: the start line of this clone in the source code</li>
+                          <li>endLine: the end line of this clone in the source code</li>
+                          <li>changecount: the changecount of this clone</li>
+                          <li>changetype: type of chain of this clone("a"-> addition, "d"-> deletion, "c"--> correction, "-1" --> not recorded)</li>
+                          <li>cloneclass: the clone class id of this clone</li>
+                        </ul>
+                      </li>
+                      <li>
+                        cloneInstances
+                        <br>
+                        this object contains information about current clone chain in revisions after start revision
+                        <ul>
+                          <li>
+                            for each object in cloneInstances object:
+                            it only contains fields which is different compare to baseCase object
+                            <br>
+                            In example:
+                            <ul>
+                              <li>endLine: 14</li>
+                              <li>startLine: 7</li>
+                              <li>cloneclass: 4</li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ol>
+            </li>
+            <li>
+              t2_clone_evolution: array of all clone chains in type 2
+              <br>
+              in same format of t1_clone_evolution
+            </li>
+            <li>
+              t3_clone_evolution: array of all clone chains in type 3
+              <br>
+              in same format of t3_clone_evolution
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="show/data_files/colors.json">colors.json</a>
+          <br>
+          array of 1000 colors used to color clone chains in parallel coordiante and force layout
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div>
+    <a href="show/system.zip">Download whole system</a>
+  </div>
+  <div>
+    Developer: Shisong Wang, Yukun Li
+    <br>
+    Acknowledgement: Debajyoti Mondal, Manishankar Mondal, Chanchal K. Roy, Kevin Schneider
+  </div>
+  <ul>
+    <li>
+        To open the system, click <a href="show/index.html">here</a>
+    </li>
+    <li>
+        To see the <a href="document.pdf">document</a>
+    </li>
+  </ul>
+</body>
+</html>
